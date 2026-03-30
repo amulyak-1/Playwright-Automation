@@ -1,0 +1,9 @@
+{
+    "url": "https://demoqa.com/automation-practice-form",
+    "firstName": "Amulya",
+    "lastName": "KP",
+    "email": "amulya1@test.com",
+    "gender" : "Female",
+    "mobile": "9876543210",
+    "assertion": "Thanks for submitting the form"
+  }

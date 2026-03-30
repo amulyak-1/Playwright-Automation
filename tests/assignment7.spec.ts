@@ -9,11 +9,14 @@ test('test', async ({ page }) => {
  
   await page.getByRole('textbox', { name: 'name@example.com' }).fill('amulyakp@emmes.com');
   await page.getByRole('radio', { name: 'Female' }).check();
-  await page.getByRole('textbox', { name: 'Mobile Number' }).fill('9876543210');
  
+  await page.getByRole('textbox', { name: 'Mobile Number' }).fill('9876543210');
+  await page.locator('#dateOfBirthInput').click();
+  await page.getByRole('gridcell', { name: 'Choose Sunday, March 1st,' }).click();
   await page.getByRole('checkbox', { name: 'Reading' }).check();
 
-  
+  const filePath = 'C:/Users/Kamulya/OneDrive - The Emmes Company, LLC/Desktop/Assignment/file_upload/CertificateOfCompletion_Git Essential Training.pdf'; 
+  await page.setInputFiles('input#uploadPicture', filePath);
   await page.locator('#state svg').click();
   await page.getByRole('option', { name: 'Rajasthan' }).click();
   await page.locator('div').filter({ hasText: /^Select City$/ }).nth(3).click();
