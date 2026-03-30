@@ -1,5 +1,5 @@
 import { Page, expect, Locator } from "@playwright/test";
- 
+import formData from "../testData/testData6.json";
 export class PracticeFormPage {
  
   firstNameInput;
@@ -23,7 +23,7 @@ export class PracticeFormPage {
  
        
     async expectBorderError(input: Locator) {
-        await expect(input).toHaveCSS("border-color", "rgb(220, 53, 69)");
+        await expect(input).toHaveCSS("border-color", formData.bordercolor);
  
     }
  
