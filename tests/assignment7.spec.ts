@@ -1,28 +1,50 @@
-import { test, expect } from '@playwright/test';
+import { test } from '@playwright/test';
+import { AppPages } from '../Page-Object/Loginpage';
+import userData from '../testData/users.json';
 
-test('test', async ({ page }) => {
- await page.goto('https://demoqa.com/automation-practice-form');
-  
- 
-  await page.getByRole('textbox', { name: 'First Name' }).fill('Amulya');
-  await page.getByRole('textbox', { name: 'Last Name' }).fill('kp');
- 
-  await page.getByRole('textbox', { name: 'name@example.com' }).fill('amulyakp@emmes.com');
-  await page.getByRole('radio', { name: 'Female' }).check();
- 
-  await page.getByRole('textbox', { name: 'Mobile Number' }).fill('9876543210');
-  await page.locator('#dateOfBirthInput').click();
-  await page.getByRole('gridcell', { name: 'Choose Sunday, March 1st,' }).click();
-  await page.getByRole('checkbox', { name: 'Reading' }).check();
+test('Full parallel execution - login to contact creation', async ({ browser }) => {
 
-  const filePath = 'C:/Users/Kamulya/OneDrive - The Emmes Company, LLC/Desktop/Assignment/file_upload/CertificateOfCompletion_Git Essential Training.pdf'; 
-  await page.setInputFiles('input#uploadPicture', filePath);
-  await page.locator('#state svg').click();
-  await page.getByRole('option', { name: 'Rajasthan' }).click();
-  await page.locator('div').filter({ hasText: /^Select City$/ }).nth(3).click();
-  await page.getByRole('option', { name: 'Jaiselmer' }).click();
-  await page.getByRole('button', { name: 'Submit' }).click();
+  await Promise.all([
 
-  //Assertion
-  await expect (page.getByText('Thanks for submitting the form')).toBeVisible();
+    // ---------------- USER 1 ----------------
+    (async () => {
+      const context = await browser.newContext();
+      const page = await context.newPage();
+      const app = new AppPages(page);
+
+      await app.navigate();
+      await app.login(
+        userData.user1.email,
+        userData.user1.password
+      );
+
+      await app.openContactForm();
+      await app.fillContactForm(userData.user1.contact);
+      await app.submitContact();
+
+      await app.logout();
+      await context.close();
+    })(),
+
+    // ---------------- USER 2 ----------------
+    (async () => {
+      const context = await browser.newContext();
+      const page = await context.newPage();
+      const app = new AppPages(page);
+
+      await app.navigate();
+      await app.login(
+        userData.user2.email,
+        userData.user2.password
+      );
+
+      await app.openContactForm();
+      await app.fillContactForm(userData.user2.contact);
+      await app.submitContact();
+
+      await app.logout();
+      await context.close();
+    })()
+
+  ]);
 });

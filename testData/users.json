@@ -1,0 +1,36 @@
+{
+  "user1": {
+    "email": "adc@gmail.com",
+    "password": "abc@123",
+    "contact": {
+      "firstName": "Amulya",
+      "lastName": "K",
+      "dob": "2004-01-10",
+      "email": "xxx@gmail.com",
+      "phone": "8005112233",
+      "address1": "Test",
+      "address2": "Test1",
+      "city": "Mandya",
+      "state": "Karnataka",
+      "postalCode": "570028",
+      "country": "India"
+    }
+  },
+  "user2": {
+    "email": "pi@gmail.com",
+    "password": "Test@7103",
+    "contact": {
+      "firstName": "John",
+      "lastName": "S",
+      "dob": "2003-05-12",
+      "email": "john@gmail.com",
+      "phone": "9001122334",
+      "address1": "Street 1",
+      "address2": "Street 2",
+      "city": "Bangalore",
+      "state": "KA",
+      "postalCode": "560001",
+      "country": "India"
+    }
+  }
+}
